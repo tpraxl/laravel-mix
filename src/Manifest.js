@@ -54,7 +54,7 @@ class Manifest {
     hash(file) {
         let hash = new File(path.join(Config.publicPath, file)).version();
         
-        let filePath = this.normalizePath(filePath);
+        let filePath = this.normalizePath(file);
 
         this.manifest[filePath] = filePath + '?id=' + hash;
 
