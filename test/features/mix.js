@@ -161,7 +161,7 @@ test.cb.serial('it can version an entire directory or regex of files.', t => {
 });
 
 
-test.cb.serial('the kitchen sink', t => {
+test.only.cb.serial('the kitchen sink', t => {
     new File('test/fixtures/fake-app/public/file.js').write('var foo');
 
     mix.js('test/fixtures/fake-app/resources/assets/js/app.js', 'js')
@@ -178,7 +178,8 @@ test.cb.serial('the kitchen sink', t => {
 
     compile(t, () => {
         t.true(File.exists('test/fixtures/fake-app/public/js/all.js'));
-
+        // this will fail. It serves to show the difference between the read file content on windows node 6 and other node versions
+        t.is('', new File('test/fixtures/fake-app/public/js/vendor.js').read());
         t.deepEqual({
             "/file.js": "/file.js?id=6535b4d330f12366c3f7",
             "/js/all.js": "/js/all.js?id=d198d4b3b25e9d66fa37",
